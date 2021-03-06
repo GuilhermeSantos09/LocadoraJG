@@ -17,6 +17,9 @@ namespace LocadoraJG
         {
             InitializeComponent();
             carroSelecionado = null;
+            Banco banco = new Banco();
+            dataGridView1.DataSource = banco.BuscarCarro(null);
+            dataGridView1.Refresh();
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -122,6 +125,14 @@ namespace LocadoraJG
         private void textBox10_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+            carroSelecionado = null;
+            Banco banco = new Banco();
+            dataGridView1.DataSource = banco.BuscarCarro(null);
+            dataGridView1.Refresh();
         }
     }
 }
