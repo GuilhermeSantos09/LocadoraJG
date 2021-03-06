@@ -12,9 +12,11 @@ namespace LocadoraJG
 {
     public partial class Form1 : Form
     {
+        Carro carroSelecionado;
         public Form1()
         {
             InitializeComponent();
+            carroSelecionado = null;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -24,7 +26,7 @@ namespace LocadoraJG
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            new Form2().Show();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -59,12 +61,67 @@ namespace LocadoraJG
 
         private void button6_Click(object sender, EventArgs e)
         {
-            Banco banco = new Banco();
+            if (carroSelecionado!=null) {
+                Form2 editarCarro = new Form2();
+                Banco banco = new Banco();
+                Carro carro = banco.PegarCarro(carroSelecionado.GetPK());
+                editarCarro.mudarParaEditar(carro);
+                editarCarro.Show(); 
+            }
+        }
 
-            Carro carro = banco.PegarCarro(2);
-            carro.placa = "CIS-2157";
-            carro.modelo = "Gol bolinha";
-            banco.AtualizarCarro(carro);
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label11_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (carroSelecionado != null)
+            {
+                Banco banco = new Banco();
+                DialogResult diagResult = MessageBox.Show("Deletar Carro","Você tem certeza que deseja deletar o carro de pk: "+pk.ToString()+" ?",MessageBoxButtons.YesNo);
+                if (diagResult == DialogResult.Yes)
+                {
+                    if (banco.DeletarCarro(carroSelecionado.GetPK()))
+                        MessageBox.Show("Registro deletado");
+                    else
+                        MessageBox.Show("ERRO, registro não deletado");
+                }
+            }
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int pk = int.Parse(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
+            Banco banco = new Banco();
+            carroSelecionado = banco.PegarCarro(pk);
+            txtId.Text = carroSelecionado.GetPK().ToString();
+            txtMarca.Text = carroSelecionado.marca;
+            txtModelo.Text = carroSelecionado.modelo;
+            txtPlaca.Text = carroSelecionado.marca;
+            textBox10.Text = "R$"+carroSelecionado.valor.ToString();
+
+        }
+
+        private void textBox10_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
