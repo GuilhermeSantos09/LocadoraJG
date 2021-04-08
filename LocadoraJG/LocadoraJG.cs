@@ -84,7 +84,7 @@ public class Cliente : ContemPK
 public class Emprestimo : ContemPK
 {
     private int fkCarro, fkCliente;
-    public int data_inicial, data_final;
+    public string data_inicial, data_final;
     public string situacao;
 
     //Nomeclatura de atributos (BD)
@@ -112,6 +112,13 @@ public class Emprestimo : ContemPK
 
     }
 
+    public Emprestimo(int pk, int fkcarro, int fkcliente)
+    {
+        SetPK(pk);
+        this.fkCarro = fkcarro;
+        this.fkCliente = fkcliente;
+    }
+
     public int GetFKCarro()
     {
         return fkCarro;
@@ -127,7 +134,8 @@ public class Emprestimo : ContemPK
 class Multa : ContemPK
 {
     private int fkEmprestimo;
-    public int valor, data_emissao, data_expiracao;
+    public int valor;
+    public string data_emissao, data_expiracao;
     public string descricao, situacao;
 
     //Nomeclatura de atributos (BD)
