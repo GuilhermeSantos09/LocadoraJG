@@ -80,20 +80,29 @@
             // textBox9
             // 
             this.textBox9.Location = new System.Drawing.Point(361, 237);
+            this.textBox9.MaxLength = 75;
             this.textBox9.Name = "textBox9";
             this.textBox9.Size = new System.Drawing.Size(204, 20);
             this.textBox9.TabIndex = 40;
             // 
             // textBox8
             // 
+            this.textBox8.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.textBox8.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.textBox8.Location = new System.Drawing.Point(361, 211);
+            this.textBox8.MaxLength = 15;
             this.textBox8.Name = "textBox8";
             this.textBox8.Size = new System.Drawing.Size(149, 20);
             this.textBox8.TabIndex = 39;
             // 
             // textBox7
             // 
+            this.textBox7.AutoCompleteCustomSource.AddRange(new string[] {
+            "00000000000"});
+            this.textBox7.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.textBox7.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.textBox7.Location = new System.Drawing.Point(361, 185);
+            this.textBox7.MaxLength = 12;
             this.textBox7.Name = "textBox7";
             this.textBox7.Size = new System.Drawing.Size(149, 20);
             this.textBox7.TabIndex = 38;
@@ -101,6 +110,7 @@
             // textBox6
             // 
             this.textBox6.Location = new System.Drawing.Point(361, 159);
+            this.textBox6.MaxLength = 30;
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(149, 20);
             this.textBox6.TabIndex = 37;

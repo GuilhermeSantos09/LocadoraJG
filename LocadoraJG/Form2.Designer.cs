@@ -110,6 +110,10 @@
             // 
             // textBox10
             // 
+            this.textBox10.AutoCompleteCustomSource.AddRange(new string[] {
+            "000000"});
+            this.textBox10.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.textBox10.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.textBox10.Location = new System.Drawing.Point(366, 257);
             this.textBox10.Name = "textBox10";
             this.textBox10.Size = new System.Drawing.Size(149, 20);
@@ -117,6 +121,10 @@
             // 
             // textBox9
             // 
+            this.textBox9.AutoCompleteCustomSource.AddRange(new string[] {
+            "AAA-9999"});
+            this.textBox9.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.textBox9.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.textBox9.Location = new System.Drawing.Point(366, 231);
             this.textBox9.Name = "textBox9";
             this.textBox9.Size = new System.Drawing.Size(149, 20);

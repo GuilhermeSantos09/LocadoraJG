@@ -29,7 +29,10 @@ namespace LocadoraJG
         {
             if (!editar)//NovoRegistro
             {
-                carro = new Carro(textBox9.Text, textBox6.Text, textBox7.Text, int.Parse(textBox8.Text), int.Parse(textBox10.Text));
+                try
+                {
+                    carro = new Carro(textBox9.Text, textBox6.Text, textBox7.Text, int.Parse(textBox8.Text), int.Parse(textBox10.Text));
+                
                 Banco banco = new Banco();
                 int pk = banco.RegistrarCarro(carro);
                 if (pk > 0)
@@ -38,6 +41,11 @@ namespace LocadoraJG
                     this.Hide();
                 }
                 else MessageBox.Show("ERRO, registro não efetuado.");
+                }
+                catch
+                {
+                    MessageBox.Show("ERRO, registro não efetuado.");
+                }
             }
             else//Editar registro ja existente
             {
@@ -67,9 +75,12 @@ namespace LocadoraJG
             label1.Text = "Editar registro de carro";
             textBox9.Text =carro.placa;
             textBox6.Text =carro.modelo;
-            textBox9.Text =carro.marca;
-            carro.ano = int.Parse(textBox8.Text);
-            carro.valor = int.Parse(textBox9.Text);
+            textBox7.Text =carro.marca;
+            textBox8.Text =carro.ano.ToString();
+            textBox10.Text =carro.valor.ToString();
+            button1.Text = "Atualizar";
+            editar = true;
+           
         }
     }
 }

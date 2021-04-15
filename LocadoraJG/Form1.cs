@@ -12,60 +12,27 @@ namespace LocadoraJG
 {
     public partial class Form1 : Form
     {
+        DataTable carros;
         Carro carroSelecionado;
         public Form1()
         {
             InitializeComponent();
             carroSelecionado = null;
             Banco banco = new Banco();
-            dataGridView1.DataSource = banco.BuscarCarro(null);
+             carros = banco.BuscarCarro(null);
+            dataGridView1.DataSource = carros;
             dataGridView1.Refresh();
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)//novocarro
         {
             new Form2().Show();
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label9_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-           
-        }
-
-        private void button6_Click(object sender, EventArgs e)
+        private void button6_Click(object sender, EventArgs e)//editar carro
         {
             if (carroSelecionado!=null) {
-                Form2 editarCarro = new Form2();
+                Form2 editarCarro = new Form2();//reutilizo da tela de registro
                 Banco banco = new Banco();
                 Carro carro = banco.PegarCarro(carroSelecionado.GetPK());
                 editarCarro.mudarParaEditar(carro);
@@ -73,32 +40,12 @@ namespace LocadoraJG
             }
         }
 
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label11_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button5_Click(object sender, EventArgs e)
+        private void button5_Click(object sender, EventArgs e)//deletar carro
         {
             if (carroSelecionado != null)
             {
                 Banco banco = new Banco();
-                DialogResult diagResult = MessageBox.Show("Deletar Carro","Você tem certeza que deseja deletar o carro de pk: "+pk.ToString()+" ?",MessageBoxButtons.YesNo);
+                DialogResult diagResult = MessageBox.Show("Você tem certeza que deseja deletar o carro de pk: "+carroSelecionado.GetPK().ToString()+" ?", "Deletar Carro", MessageBoxButtons.YesNo);
                 if (diagResult == DialogResult.Yes)
                 {
                     if (banco.DeletarCarro(carroSelecionado.GetPK()))
@@ -109,30 +56,53 @@ namespace LocadoraJG
             }
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void button3_Click_1(object sender, EventArgs e)//refresh
         {
-            int pk = int.Parse(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
-            Banco banco = new Banco();
-            carroSelecionado = banco.PegarCarro(pk);
-            txtId.Text = carroSelecionado.GetPK().ToString();
-            txtMarca.Text = carroSelecionado.marca;
-            txtModelo.Text = carroSelecionado.modelo;
-            txtPlaca.Text = carroSelecionado.marca;
-            textBox10.Text = "R$"+carroSelecionado.valor.ToString();
-
-        }
-
-        private void textBox10_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button3_Click_1(object sender, EventArgs e)
-        {
+            carros = null;
             carroSelecionado = null;
             Banco banco = new Banco();
-            dataGridView1.DataSource = banco.BuscarCarro(null);
+            carros = banco.BuscarCarro(null);
+            dataGridView1.DataSource = carros;
             dataGridView1.Refresh();
+        }
+
+        private void dataGridView1_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)//selecionar carro
+        {
+            try
+            {
+                Banco banco = new Banco();
+                carroSelecionado =banco.PegarCarro((int)dataGridView1.Rows[e.RowIndex].Cells[0].Value);
+                txtId.Text = carroSelecionado.GetPK().ToString();
+                txtAno.Text = carroSelecionado.ano.ToString();
+                txtMarca.Text = carroSelecionado.marca;
+                txtModelo.Text = carroSelecionado.modelo;
+                txtPlaca.Text = carroSelecionado.placa;
+                textBox10.Text = "R$" + carroSelecionado.valor.ToString();
+                //selecionar emprestimo relacionados nao finalizados
+                DataTable dtt= banco.BuscarEmprestimo(Emprestimo.FKCARRO+"="+ carroSelecionado.GetPK().ToString()+" and "+Emprestimo.DATA_FINAL+">convert('"+ DateTime.Now.Year.ToString()+"-"+ DateTime.Now.Month.ToString()+"-"+ DateTime.Now.Day.ToString() +"',date)");
+                if (dtt.Rows.Count > 0)
+                    textBox5.Text = "Indisponivel";
+                else
+                    textBox5.Text = "Disponivel";
+
+            }
+            catch
+            {
+                carroSelecionado = null;
+                txtId.Text = "";
+                txtMarca.Text = "";
+                txtModelo.Text = "";
+                txtPlaca.Text = "";
+                textBox10.Text = "";
+                textBox5.Text = "";
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)//gerenciar cliente emprestimo
+        {
+            Form4 clientesemprestimos = new Form4();
+            clientesemprestimos.Show();
+            this.Hide();
         }
     }
 }

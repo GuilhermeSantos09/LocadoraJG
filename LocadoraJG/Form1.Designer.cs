@@ -64,7 +64,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(433, 330);
             this.dataGridView1.TabIndex = 0;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.dataGridView1.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_RowHeaderMouseClick);
             // 
             // button1
             // 
@@ -84,6 +84,7 @@
             this.button2.TabIndex = 2;
             this.button2.Text = "Gerenciar clientes e empréstimos";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label3
             // 
@@ -135,7 +136,6 @@
             this.textBox10.Name = "textBox10";
             this.textBox10.Size = new System.Drawing.Size(148, 20);
             this.textBox10.TabIndex = 17;
-            this.textBox10.TextChanged += new System.EventHandler(this.textBox10_TextChanged);
             // 
             // label4
             // 
@@ -145,7 +145,6 @@
             this.label4.Size = new System.Drawing.Size(40, 13);
             this.label4.TabIndex = 18;
             this.label4.Text = "Marca:";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // label5
             // 
@@ -155,7 +154,6 @@
             this.label5.Size = new System.Drawing.Size(45, 13);
             this.label5.TabIndex = 19;
             this.label5.Text = "Modelo:";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // label6
             // 
@@ -165,7 +163,6 @@
             this.label6.Size = new System.Drawing.Size(29, 13);
             this.label6.TabIndex = 20;
             this.label6.Text = "Ano:";
-            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // label7
             // 
@@ -193,7 +190,6 @@
             this.label9.Size = new System.Drawing.Size(61, 13);
             this.label9.TabIndex = 24;
             this.label9.Text = "Disponível:";
-            this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
             // label10
             // 
@@ -272,7 +268,6 @@
             this.label11.Size = new System.Drawing.Size(147, 13);
             this.label11.TabIndex = 39;
             this.label11.Text = "Agendamento do emprestimo:";
-            this.label11.Click += new System.EventHandler(this.label11_Click);
             // 
             // button3
             // 
@@ -317,7 +312,6 @@
             this.Controls.Add(this.dataGridView1);
             this.Name = "Form1";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

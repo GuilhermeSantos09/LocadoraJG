@@ -59,11 +59,11 @@ public class Carro : ContemPK
 public class Cliente : ContemPK
 {
     public string nome, endereco;
-    public int cpf, tel;
+    public string cpf, tel;
 
     //Nomeclatura de atributos (BD)
     public static readonly string NOME = "nome", ENDERECO = "endereco", CPF = "cpf", TEL = "tel";
-        public Cliente(string nome, string endereco, int cpf, int tel)
+        public Cliente(string nome, string endereco, string cpf, string tel)
     {
         this.nome = nome;
         this.endereco = endereco;
@@ -71,7 +71,7 @@ public class Cliente : ContemPK
         this.tel = tel;
     }
 
-    public Cliente(int pk, string nome, string endereco, int cpf, int tel)
+    public Cliente(int pk, string nome, string endereco, string cpf, string tel)
     {
         this.nome = nome;
         this.endereco = endereco;
@@ -81,14 +81,14 @@ public class Cliente : ContemPK
     }
 }
 
-public class Emprestimo : ContemPK
+public class Emprestimo  : ContemPK
 {
     private int fkCarro, fkCliente;
     public string data_inicial, data_final;
     public string situacao;
 
     //Nomeclatura de atributos (BD)
-    public static readonly string FKCARRO = "fk_carro", FKCLIENTE = "fk_cliente", DATA_INICIAL = "data_inicial", DATA_FINAL = "data_final", SITUACAO = "";
+    public static readonly string FKCARRO = "fk_carro", FKCLIENTE = "fk_cliente", DATA_INICIAL = "data_inicial", DATA_FINAL = "data_final", SITUACAO = "situacao";
 
     public Emprestimo(Carro carro, Cliente cliente)
     {
@@ -98,6 +98,13 @@ public class Emprestimo : ContemPK
             fkCarro = carro.GetPK();
             fkCliente = cliente.GetPK();
         }
+    }
+    public Emprestimo(int fkcarro, int fkcliente)
+    {
+        
+            this.fkCarro = fkcarro;
+            this.fkCliente = fkcliente;
+        
     }
 
     public Emprestimo(int pk, Carro carro, Cliente cliente)
@@ -131,7 +138,7 @@ public class Emprestimo : ContemPK
 
 }
 
-class Multa : ContemPK
+public class Multa : ContemPK
 {
     private int fkEmprestimo;
     public int valor;
@@ -160,6 +167,12 @@ class Multa : ContemPK
             this.valor = valor;
             SetPK(pk);
         }
+    }
+    public Multa(int pk, int fk, int valor)
+    {
+            fkEmprestimo = fk;
+            this.valor = valor;
+            SetPK(pk);
     }
 
     public int GetFk()
